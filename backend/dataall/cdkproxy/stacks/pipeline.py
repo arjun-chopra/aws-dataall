@@ -116,7 +116,7 @@ class PipelineStack(Stack):
         self.devStages = [env.stage for env in development_environments]
 
         # Support resources
-        build_role_policy = iam.Policy(
+        build_role_policy = iam.ManagedPolicy(
             self,
             f"{pipeline.name}-policy",
             policy_name=f"{pipeline.name}-policy",
@@ -131,7 +131,7 @@ class PipelineStack(Stack):
             self,
             "PipelineRole",
             role_name=pipeline.name,
-            inline_policies={f"Inline{pipeline.name}": build_role_policy.document},
+            managed_policies={f"Inline{pipeline.name}": build_role_policy.document},
             assumed_by=iam.ServicePrincipal("codebuild.amazonaws.com"),
         )
 

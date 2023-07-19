@@ -41,13 +41,13 @@ class DataPolicy:
         self.team = team
         self.datasets = datasets
 
-    def generate_data_access_policy(self) -> iam.Policy:
+    def generate_data_access_policy(self) -> iam.ManagedPolicy:
         """
-        Creates aws_iam.Policy based on team datasets
+        Creates aws_iam.ManagedPolicy based on team datasets
         """
         statements: List[iam.PolicyStatement] = self.get_statements()
 
-        policy: iam.Policy = iam.Policy(
+        policy: iam.ManagedPolicy = iam.ManagedPolicy(
             self.stack,
             self.id,
             policy_name=self.name,

@@ -626,10 +626,7 @@ class EnvironmentSetup(Stack):
             self,
             id,
             role_name=group.environmentIAMRoleName,
-            inline_policies={
-                f'{group.environmentIAMRoleName}DataPolicy': data_policy.document,
-            },
-            managed_policies=services_policies,
+            managed_policies=services_policies.append(data_policy),
             assumed_by=iam.CompositePrincipal(
                 iam.ServicePrincipal('glue.amazonaws.com'),
                 iam.ServicePrincipal('lambda.amazonaws.com'),

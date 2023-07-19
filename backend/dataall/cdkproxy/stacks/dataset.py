@@ -219,7 +219,7 @@ class Dataset(Stack):
             )
 
         # Dataset IAM role - ETL policies
-        dataset_admin_policy = iam.Policy(
+        dataset_admin_policy = iam.ManagedPolicy(
             self,
             'DatasetAdminPolicy',
             policy_name=dataset.S3BucketName,
